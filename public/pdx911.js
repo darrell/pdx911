@@ -10,9 +10,10 @@ var currentMarkers = []
 
 function clearTimeouts() {
   $.each(panTimeout, function(i, timeout) {
+    console.log(timeout);
     clearTimeout(timeout);
   })
-  panTimeout = [];
+  panTimeout = new Array;
 }
 
 function setMarkerTimeout(marker, time) {
@@ -29,7 +30,7 @@ function setMarkerTimeout(marker, time) {
   }
 }
 function removeOldMarkers() {
- newMarkers=[]
+ var newMarkers=[]
  for (var i=0; i < currentMarkers.length; i++) {
   var me=currentMarkers[i]
   d=new Date(me.feature.properties.published)
@@ -38,13 +39,14 @@ function removeOldMarkers() {
     map.removeLayer(me)
   } else {
    newMarkers.push(me);
+   me.setOpacity(1.25-(((now-d)/1000)/markerHistory));
   }
  }
  currentMarkers = newMarkers;
+ return(currentMarkers);
 }
 
 function loadCalls(time) {
-  removeOldMarkers();
   time = typeof time !== 'undefined' ? time : 1500;
   url = "/calls/" + time
   $.getJSON(url, function(geojson) {
@@ -61,12 +63,25 @@ function loadCalls(time) {
       }
     })
       .addTo(map);
+  removeOldMarkers();
   });
+  setTimeout(function() {loadCalls(60);console.log("Hi");},60*1000);
 }
 
 function disableAutoPan() {
   doMarkerPan = false;
+  $('#togglePan').html('Enable Auto Pan');
 }
 function enableAutoPan() {
   doMarkerPan = true;
+ $('#togglePan').html('Disable Auto Pan');
+}
+
+function toggleAutoPan() {
+ if (doMarkerPan) {
+  disableAutoPan();
+ } else { 
+  enableAutoPan();
+ }
+ return(doMarkerPan);
 }
