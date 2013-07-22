@@ -40,13 +40,13 @@ def main
      ent = Entry.find_by(entry_id: attrs[:id])
      is_new = ent.nil?
      ent = Entry.find_or_create_by(entry_id: attrs[:id])
-     ent.call_type ||= attrs[:call_type]
-     ent.latitude ||= lat
-     ent.longitude ||= lng
-     ent.updated ||= updated
-     ent.published ||= published
-     ent.agency ||= attrs[:agency]
-     ent.address ||= attrs[:address]
+     ent.call_type = attrs[:call_type]
+     ent.latitude = lat
+     ent.longitude = lng
+     ent.updated = updated
+     ent.published = published
+     ent.agency = attrs[:agency]
+     ent.address = attrs[:address]
      ent.save!
 #     if is_new
 #       puts "added: #{ent.inspect}" 
