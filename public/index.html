@@ -32,22 +32,33 @@
 		}
                 #infobar {
                    background-color: black;
-                   text-color: white;
                    padding: 0 0 0 0;
                    position: absolute; top: 0;bottom: 30px;width:100%;
                 }
-                #infobar h2  {
+                #infobar span  {
                   color: white; 
                   margin: 0;
                   font-family: sans-serif; 
-                  font-size: 26px; 
+                  font-size: 20px; 
                   padding-left: 10px;
+                  vertical-align: center;
+                }
+                #title {
+                  font-size: 26px;
+                }
+                #opacityLegend {
+                  float: right;
+                  text-align: right;
+                  padding-right: 10px;
+                }
+                #infobar img {
+                 height: 26px;
                 }
                 #togglePan { 
                   text-decoration: underline;
                 }
 	</style>
-         <div id="infobar"> <h2>PDX 911 Calls<span style="padding-left: 30px; font-size: 20px;" id="togglePan">Disable Auto Pan</span></h2></div>
+         <div id="infobar"> <span><span="title">PDX 911 Calls</span><span style="padding-left: 30px; font-size: 20px;" id="togglePan">Disable Auto Pan</span></span><span id="opacityLegend"><img src="http://api.tiles.mapbox.com/mapbox.js/v1.3.1/images/marker-icon.png"> = < 15 min old<img style="margin-left: 10px;opacity: 0.5;" src="http://api.tiles.mapbox.com/mapbox.js/v1.3.1/images/marker-icon.png"> = > 45 mins old </span></div>
 	<div id="map"></div>
     <script type="text/javascript">
 
