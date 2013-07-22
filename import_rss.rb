@@ -48,9 +48,9 @@ def main
      ent.agency ||= attrs[:agency]
      ent.address ||= attrs[:address]
      ent.save!
-     if is_new
-       puts "added: #{ent.inspect}" 
-     end
+#     if is_new
+#       puts "added: #{ent.inspect}" 
+#     end
   end
 end
 
