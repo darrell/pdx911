@@ -3,14 +3,14 @@ var lastGeoJSON;
 var doMarkerPan = true;
 var bar;
 var panTimeout = [];
-var timeoutCounter = 0;
-var timeoutLength = 5000;
+var timeoutCounter = 0; // counter for calculating pan interval
+var timeBetweenPans = 5000;
 var markerHistory = 3600; // seconds ago
 var currentMarkers = []
 
 function clearTimeouts() {
   $.each(panTimeout, function(i, timeout) {
-    console.log(timeout);
+    //console.log(timeout);
     clearTimeout(timeout);
   })
   panTimeout = new Array;
@@ -25,7 +25,7 @@ function setMarkerTimeout(marker, time) {
         map.panTo(new L.LatLng(foo[1], foo[0]));
         marker.openPopup();
       }
-    }, timeoutCounter * timeoutLength);
+    }, timeoutCounter * timeBetweenPans);
     panTimeout.push(timeout);
   }
 }
@@ -59,13 +59,14 @@ function loadCalls(time) {
       onEachFeature: function(feature, layer) {
         marker=layer.bindPopup(feature.properties.html);
         setMarkerTimeout(marker, time);
+        console.log('added feature: ' + feature.id);
         currentMarkers.push(marker);
       }
     })
       .addTo(map);
   removeOldMarkers();
   });
-  setTimeout(function() {loadCalls(60);console.log("Hi");},60*1000);
+  setTimeout(function() {loadCalls(60);},60*1000);
 }
 
 function disableAutoPan() {
