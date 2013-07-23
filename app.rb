@@ -22,7 +22,7 @@ class Entry < ActiveRecord::Base
 end
 
 def calls_since(time)
-  x=RGeo::GeoJSON::FeatureCollection.new(Entry.where("published >= ?", time).order(:published).reverse_order.map(&:to_geojson))
+  x=RGeo::GeoJSON::FeatureCollection.new(Entry.where("created_at >= ?", time).order(:created_at).reverse_order.map(&:to_geojson))
   RGeo::GeoJSON.encode(x).to_json
 end
 
