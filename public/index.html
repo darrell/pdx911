@@ -36,7 +36,6 @@
                  .setView(new L.LatLng(45.513, -122.59), 12)
                  .addLayer(L.mapbox.tileLayer('darrell.map-9zjkmztv',{detectRetina: true, retinaVersion: 'darrell.map-kpgi7p34'}));
   loadCalls(3600);
-  setTimeout(function() {loadCalls(60)},60*1000);
   $('#togglePan').click(function(){toggleAutoPan()});
 
   </script>
