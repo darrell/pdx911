@@ -26,14 +26,15 @@ body { margin:0; padding:0; }
 
 #infobar span  {
   color: white; 
+  height: 30px
   margin: 0;
   font-family: sans-serif; 
   font-size: 20px; 
   padding-left: 10px;
-  vertical-align: center;
+  vertical-align: middle;
 }
 
-#title {
+#infoBarTitle {
   font-size: 26px;
 }
 
@@ -44,7 +45,7 @@ body { margin:0; padding:0; }
 }
 
 #infobar img {
-  height: 26px;
+  height: 25px;
 }
 
 #togglePan { 
