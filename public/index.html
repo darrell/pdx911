@@ -1,75 +1,45 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Current 911 Calls</title>
-	<meta charset="utf-8" />
-        <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
-        <link href='http://api.tiles.mapbox.com/mapbox.js/v1.3.1/mapbox.css' rel='stylesheet' />
-        <!--[if lte IE 8]>
-          <link href='http://api.tiles.mapbox.com/mapbox.js/v1.3.1/mapbox.ie.css' rel='stylesheet' >
-        <![endif]-->
-        <script src='http://api.tiles.mapbox.com/mapbox.js/v1.3.1/mapbox.js'></script>
-        <script src='/pdx911.js'></script>
-<style>
-        body { margin:0; padding:0; }
-        #map { position:absolute; top:30px; bottom:0; width:100%; }
-    </style>
+  <title>Current 911 Calls</title>
+  <meta charset="utf-8" />
+  <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+  <link href='http://api.tiles.mapbox.com/mapbox.js/v1.3.1/mapbox.css' rel='stylesheet' />
+  <!--[if lte IE 8]>
+    <link href='http://api.tiles.mapbox.com/mapbox.js/v1.3.1/mapbox.ie.css' rel='stylesheet' >
+  <![endif]-->
+  <script src='http://api.tiles.mapbox.com/mapbox.js/v1.3.1/mapbox.js'></script>
+  <script src='/pdx911.js'></script>
+  <link href='pdx911.css' rel='stylesheet' />
 </head>
 <body>
-	<style>
-		.legend {
-			text-align: left;
-			line-height: 18px;
-			color: #555;
-		}
-		.legend i {
-			width: 18px;
-			height: 18px;
-			float: left;
-			margin-right: 8px;
-			opacity: 0.7;
-		}
-                #infobar {
-                   background-color: black;
-                   padding: 0 0 0 0;
-                   position: absolute; top: 0;bottom: 30px;width:100%;
-                }
-                #infobar span  {
-                  color: white; 
-                  margin: 0;
-                  font-family: sans-serif; 
-                  font-size: 20px; 
-                  padding-left: 10px;
-                  vertical-align: center;
-                }
-                #title {
-                  font-size: 26px;
-                }
-                #opacityLegend {
-                  float: right;
-                  text-align: right;
-                  padding-right: 10px;
-                }
-                #infobar img {
-                 height: 26px;
-                }
-                #togglePan { 
-                  text-decoration: underline;
-                }
-	</style>
-         <div id="infobar"> <span><span="title">PDX 911 Calls</span><span style="padding-left: 30px; font-size: 20px;" id="togglePan">Disable Auto Pan</span></span><span id="opacityLegend"><img src="http://api.tiles.mapbox.com/mapbox.js/v1.3.1/images/marker-icon.png"> = < 15 min old<img style="margin-left: 10px;opacity: 0.5;" src="http://api.tiles.mapbox.com/mapbox.js/v1.3.1/images/marker-icon.png"> = > 45 mins old </span></div>
-	<div id="map"></div>
-    <script type="text/javascript">
+  <div id="infobar"> 
+  <span>
+    <span="title">PDX 911 Calls</span>
+    <span style="padding-left: 30px; font-size: 20px;" id="togglePan">
+      Disable Auto Pan
+    </span>
+  </span>
+  <span id="opacityLegend">
+    <img src="http://api.tiles.mapbox.com/mapbox.js/v1.3.1/images/marker-icon.png">
+    = < 15 min old
+    <img style="margin-left: 10px;opacity: 0.5;" src="http://api.tiles.mapbox.com/mapbox.js/v1.3.1/images/marker-icon.png">
+   = > 45 mins old 
+   </span>
+  </div>
+  <div id="map"></div>
 
-    var map = new L.mapbox.map('map')
-                   .setView(new L.LatLng(45.513, -122.59), 12)
-                   .addLayer(L.mapbox.tileLayer('darrell.map-9zjkmztv',{detectRetina: true, retinaVersion: 'darrell.map-kpgi7p34'}));
-    loadCalls(3600);
-    setTimeout(function() {loadCalls(60)},60*1000);
-    $('#togglePan').click(function(){toggleAutoPan()});
+  <script type="text/javascript">
 
-    </script>
+  var map = new L.mapbox.map('map')
+                 .setView(new L.LatLng(45.513, -122.59), 12)
+                 .addLayer(L.mapbox.tileLayer('darrell.map-9zjkmztv',{detectRetina: true, retinaVersion: 'darrell.map-kpgi7p34'}));
+  loadCalls(3600);
+  setTimeout(function() {loadCalls(60)},60*1000);
+  $('#togglePan').click(function(){toggleAutoPan()});
+
+  </script>
+
 </body>
 </html>
-
