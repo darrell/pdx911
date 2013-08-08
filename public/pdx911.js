@@ -26,7 +26,7 @@ function setMarkerTimeout(marker, time) {
         marker.openPopup();
       }
     }, timeoutCounter * timeBetweenPans);
-    panTimeout.push(timeout);
+    panTimeout.unshift(timeout);
   }
 }
 function removeOldMarkers() {
@@ -38,7 +38,7 @@ function removeOldMarkers() {
   if ((now-d)/1000 > markerHistory) {
     map.removeLayer(me)
   } else {
-   newMarkers.push(me);
+   newMarkers.unshift(me);
    me.setOpacity(1.25-(((now-d)/1000)/markerHistory));
   }
  }
@@ -47,6 +47,7 @@ function removeOldMarkers() {
 }
 
 function loadCalls(time) {
+  console.log('loadCalls() ' + new Date());
   time = typeof time !== 'undefined' ? time : 1500;
   url = "/calls/" + time
   $.getJSON(url, function(geojson) {
@@ -60,7 +61,7 @@ function loadCalls(time) {
         marker=layer.bindPopup(feature.properties.html);
         setMarkerTimeout(marker, time);
         console.log('added feature: ' + feature.id);
-        currentMarkers.push(marker);
+        currentMarkers.unshift(marker);
       }
     })
       .addTo(map);
