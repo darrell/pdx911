@@ -13,16 +13,22 @@ require 'rgeo'
 
 ActiveRecord::Base.establish_connection(
     :adapter  => 'postgis',
-    :host     => 'localhost',
     :database => 'pdxcrimes',
     :encoding => 'utf8'
   )
+#ActiveRecord::Base.establish_connection(
+#    :adapter  => 'postgis',
+#    :host     => 'localhost',
+#    :database => 'pdxcrimes',
+#    :encoding => 'utf8'
+ # )
 
 class Entry < ActiveRecord::Base
 end
 
 def main
-  feed = Nokogiri::XML(open("http://www.portlandonline.com/scripts/911incidents.cfm"))
+  #feed = Nokogiri::XML(URI.open("https://www.portlandonline.com/scripts/911incidents.cfm"))
+  feed = Nokogiri::XML(URI.open("https://www.portlandonline.com/scripts/911incidents.cfm",{ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE}))
   feed.remove_namespaces!
 
 
